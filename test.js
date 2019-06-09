@@ -1,0 +1,24 @@
+function makeCounter(predicate) {
+  let counter = 0;
+
+  return function () {
+    counter = predicate(counter);
+    return counter;
+  };
+}
+
+function increase(n) {
+  return ++n;
+}
+
+function decrease(n) {
+  return --n;
+}
+
+const counter = makeCounter();
+
+/* const increaser = makeCounter(increase);
+console.log(increaser());
+
+const decreaser = makeCounter(decrease);
+console.log(decreaser()); */

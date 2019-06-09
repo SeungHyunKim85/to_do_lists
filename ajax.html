@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <pre class="result">
+
+  </pre>
+  <script>
+    const $result = document.querySelector('.result');
+
+    const render = content => { $result.innerHTML = JSON.stringify(content, null, 2) };
+
+    const promiseAjax = (method, url, callback, payload) => {
+      return new Promise((resolve, reject) => {
+        const xhr = new XMLHttpRequest();
+        xhr.open(method, url);
+        xhr.setRequestHeader('Content-Type', 'application/json');
+        xhr.send(JSON.stringify(payload));
+
+        // 비동기 함수
+        xhr.onreadystatechange = () => {
+          // console.log(xhr.readyState);
+          if (xhr.readyState !== XMLHttpRequest.DONE) return;
+
+          if (xhr.status >= 200 && xhr.status < 400) {
+            // console.log(JSON.parse(xhr.response));
+            // $result.innerHTML = JSON.parse(xhr.response);
+            resolve(JSON.parse(xhr.response));
+          } else {
+            reject(xhr.status);
+          }
+        };
+      });
+    };
+
+    // };
+
+    // try {
+    //   ajax('GET', 'http://localhost:3000/todos', render);
+    // } catch (e) {
+    //   console.log('error');
+    //   console.error(e);
+    // }
+
+    // try {
+    //   setTimeout(() => { throw Error('error!!!'); }, 1000);
+    // } catch (e) {
+    //   console.error('ERROR!');
+    //   console.error(e);
+    // }
+
+    // (async function () {
+    //   const res = await promiseAjax('GET', 'http://localhost:3000/todos/');
+    //   render(res);
+    // }());
+    
+    const promise = promisAjax('GET', 'http://localhost:3000/todos/');
+
+    promise
+    
+      // .then(res => render(res))
+      // // .then(render)
+      // .catch(console.error);
+  </script>
+</body>
+</html>

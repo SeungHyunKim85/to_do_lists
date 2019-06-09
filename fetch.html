@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Fetch Test</title>
+</head>
+<body>
+  <pre class="result"></pre>
+
+  <script>
+    const $result = document.querySelector('.result');
+    const render = todos => { $result.innerHTML = JSON.stringify(todos, null, 2); };
+
+    // // Get all
+    // fetch('http://localhost:3000/todos')
+    //   .then(res => res.json())
+    //   .then(render)
+    //   .catch(console.log);
+
+    // // Get by id
+    // fetch('http://localhost:3000/todos/1')
+    //   .then(res => res.json())
+    //   .then(render)
+    //   .catch(console.log);
+
+    // // POST
+    // fetch('http://localhost:3000/todos', {
+    //   method: 'POST',
+    //   headers: { 'Content-Type': 'application/json' },
+    //   body: JSON.stringify({ id: 4, content: 'Angular', completed: false })
+    // }).then(res => res.json())
+    //   .then(render)
+    //   .catch(console.log);
+
+    // // DELETE by id
+    // fetch('http://localhost:3000/todos/4', {
+    //   method: 'DELETE'
+    // }).then(res => res.json())
+    //   .then(render)
+    //   .catch(console.log);
+
+    // // DELETE by completed
+    // fetch('http://localhost:3000/todos/completed', {
+    //   method: 'DELETE'
+    // }).then(res => res.json())
+    //   .then(render)
+    //   .catch(console.log);
+
+    // PATCH : 리소스 일부를 UPDATE
+    fetch('http://localhost:3000/todos/1', {
+      method: 'PATCH',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ completed: true })
+    }).then(res => res.json())
+      .then(render)
+      .catch(console.log);
+  </script>
+</body>
+</html>

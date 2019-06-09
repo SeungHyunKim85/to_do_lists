@@ -40,7 +40,52 @@
     <button class="control">Start</button>
   </div>
   <script>
+(function stopWatch() {
+  const $button = document.querySelector('.control');
+  const $display = document.querySelector('.display');
+  let min = 0;
+  let sec = 0;
+  let msec = 0;
+  let interval = null;
 
+  let isStart = false;
+
+  function start() {
+    isStart = true;
+    interval = setInterval(() => {
+      msec += 1;
+      if (msec === 100) {
+        sec += 1;
+        msec = 0;
+      }
+      if (sec === 60) {
+        min += 1;
+        sec = 0;
+      }
+
+      const dMin = min < 10 ? `0${min}` : min;
+      const dSec = sec < 10 ? `0${sec}` : sec;
+      const dMsec = msec < 10 ? `0${msec}` : msec;
+
+      $display.textContent = `${dMin}:${dSec}:${dMsec}`;
+    }, 10);
+  }
+
+  function stop() {
+    isStart = false;
+    clearInterval(interval);
+  }
+
+  $button.onclick = function () {
+    if (isStart) {
+      stop();
+      $button.textContent = 'Start';
+    } else {
+      start();
+      $button.textContent = 'Stop';
+    }
+  };
+}());
   </script>
 </body>
 </html>

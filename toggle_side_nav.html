@@ -73,9 +73,12 @@
       ctn.classList.add('active');
     }); */
 
-    const $container = document.querySelector('.container');
+    const $main = document.querySelector('.main');
 
-    $container.classList.toggle('active', true);
+    $main.onclick = (e) => {
+      e.target.parentNode.parentNode.classList.toggle('active');
+    };
+    //$container.classList.toggle('active', true);
     //$container.classList.remove('active');
   </script>
 </body>
