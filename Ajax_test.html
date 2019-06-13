@@ -21,15 +21,14 @@
 
       xhr.onreadystatechange = function () {
         if (xhr.readyState !== XMLHttpRequest.DONE) return;
-
         if (xhr.status >= 200 && xhr.status < 400) {
-          $result.innerHTML = xhr.response;
+          render(JSON.parse(xhr.response));
         } else {
           console.error(xhr.status);
         }
       };
-    }
-    
+    };
+    ajax('GET', 'http://localhost:3000')
   </script>
 </body>
 </html>
